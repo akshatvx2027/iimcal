@@ -1,7 +1,7 @@
 {
   "name": "IIMC Campus Apps",
   "short_name": "IIMC Apps",
-  "start_url": "./",
+  "start_url": "https://akshatvx2027.github.io/iimcal/",
   "display": "standalone",
   "background_color": "#0F172A",
   "theme_color": "#0F172A",
