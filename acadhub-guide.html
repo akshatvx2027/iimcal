@@ -197,7 +197,6 @@
 
 <header class="hero">
   <div class="hero-inner">
-    <div class="mark">AH</div>
     <h1>Everything academic,<br>in one place.</h1>
     <p>AcadHub is the batch's timetable, readings, course outlines and announcements —
        on your phone, and it tells you what's coming <em>before</em> you need to know it.</p>
@@ -343,6 +342,28 @@
     </div>
   </section>
 
+  <!-- ================================================== calendar -->
+  <section>
+    <p class="kicker">Optional: Calendar integration</p>
+    <h2>Sync your timetable with Google Calendar</h2>
+    <p class="lede">
+      You can add your AcadHub courses to Google Calendar and link your personal calendar to AcadHub.
+      There's a complete manual with step-by-step instructions, screenshots, and answers to common questions.
+    </p>
+
+    <div class="card">
+      <h3>📖 Calendar Integration Manual</h3>
+      <p>Two methods to sync your schedule:</p>
+      <p style="margin:10px 0 0;"><strong>Method 1:</strong> Get a personal link to all your courses and add it to Google Calendar.
+         Your schedule updates automatically when classes move or are cancelled.</p>
+      <p style="margin:10px 0 0;"><strong>Method 2:</strong> Link your personal Google Calendar to AcadHub using a secret code.
+         Then AcadHub can warn you about schedule conflicts with interviews, projects, or other commitments.</p>
+      <p style="margin:14px 0 0;"><a href="./calendar-integration-manual.html" target="_blank" rel="noopener"
+         style="display:inline-block;background:var(--primary);color:#fff;text-decoration:none;font-weight:700;padding:12px 24px;border-radius:10px;font-size:15px;">
+         Open the calendar manual →</a></p>
+    </div>
+  </section>
+
   <!-- ================================================ notifications -->
   <section>
     <p class="kicker">The part that's actually useful</p>
@@ -433,21 +454,24 @@ Reading: [RS] Ch. 13 · Amphi 100 East</div>
       Written between classes, so that nobody has to scroll<br>four hundred messages to find out where class is.
     </div>
     <div style="margin-top:14px">
-      Something wrong or missing? <a class="whatsapp" href="https://wa.me/918094966697">Tell me</a>
+      Something wrong or missing? <a class="mail" href="mailto:akshatvx2027@email.iimcal.ac.in">Tell me</a>
       and it's fixed for everyone.
     </div>
   </footer>
 </div>
 
 <script>
-  // Device tabs for the install instructions.
-  const tabs = document.querySelectorAll('.tabs button');
-  const panels = document.querySelectorAll('.panel');
-  tabs.forEach(function (t) {
-    t.addEventListener('click', function () {
-      tabs.forEach(function (o) { o.setAttribute('aria-selected', String(o === t)); });
-      panels.forEach(function (p) {
-        p.setAttribute('data-active', String(p.dataset.panel === t.dataset.tab));
+  // Tabs — works for multiple tab groups independently.
+  const tabGroups = document.querySelectorAll('.setup');
+  tabGroups.forEach(function (group) {
+    const tabs = group.querySelectorAll('.tabs button');
+    const panels = group.querySelectorAll('.panel');
+    tabs.forEach(function (t) {
+      t.addEventListener('click', function () {
+        tabs.forEach(function (o) { o.setAttribute('aria-selected', String(o === t)); });
+        panels.forEach(function (p) {
+          p.setAttribute('data-active', String(p.dataset.panel === t.dataset.tab));
+        });
       });
     });
   });
