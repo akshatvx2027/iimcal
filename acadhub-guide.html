@@ -1,0 +1,477 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>AcadHub — a two-minute guide</title>
+<meta name="description" content="What AcadHub is, how to put it on your phone, and what it will tell you. For MBAEx Batch 20, IIM Calcutta.">
+<meta name="theme-color" content="#4338CA">
+<style>
+  :root{
+    --primary:#4338CA; --primary-soft:#EEF2FF; --primary-mid:#C7D2FE;
+    --ink:#0F172A; --ink2:#475569; --ink3:#94A3B8;
+    --line:#E2E8F0; --bg:#F1F5F9; --card:#FFFFFF;
+    --green:#047857; --green-soft:#ECFDF5;
+    --amber:#B45309; --amber-soft:#FFFBEB;
+    --radius:16px;
+    --font:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0; font-family:var(--font); background:var(--bg); color:var(--ink);
+    line-height:1.6; -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:720px; margin:0 auto; padding:0 18px 72px}
+
+  /* ------------------------------------------------------------- hero */
+  header.hero{
+    background:linear-gradient(160deg,#4338CA 0%,#3730A3 55%,#312E81 100%);
+    color:#fff; padding:52px 18px 60px; text-align:center;
+  }
+  .hero-inner{max-width:720px;margin:0 auto}
+  .mark{
+    width:64px;height:64px;border-radius:18px;background:rgba(255,255,255,.14);
+    border:1px solid rgba(255,255,255,.28);
+    display:flex;align-items:center;justify-content:center;margin:0 auto 18px;
+    font-size:26px;font-weight:800;letter-spacing:-1px;
+  }
+  .hero h1{font-size:clamp(30px,7vw,42px);line-height:1.15;margin:0 0 12px;font-weight:800;letter-spacing:-.8px}
+  .hero p{margin:0 auto;max-width:30em;font-size:16.5px;color:#DDD9FB}
+  .hero .cta{
+    display:inline-block;margin-top:26px;background:#fff;color:var(--primary);
+    text-decoration:none;font-weight:700;font-size:16px;
+    padding:14px 30px;border-radius:12px;
+    box-shadow:0 8px 22px rgba(15,23,42,.22);
+  }
+  .hero .cta:active{transform:translateY(1px)}
+  .hero small{display:block;margin-top:14px;color:#B9B3F0;font-size:13px}
+
+  /* ------------------------------------------------------------- cards */
+  section{margin-top:34px}
+  .kicker{
+    font-size:11.5px;font-weight:700;letter-spacing:.9px;text-transform:uppercase;
+    color:var(--ink3);margin:0 0 4px;
+  }
+  h2{font-size:23px;font-weight:800;letter-spacing:-.4px;margin:0 0 6px}
+  .lede{color:var(--ink2);margin:0 0 18px;font-size:15.5px}
+  .card{
+    background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    padding:20px;margin-bottom:12px;
+  }
+  .card h3{margin:0 0 4px;font-size:16.5px;font-weight:700}
+  .card p{margin:0;color:var(--ink2);font-size:14.5px}
+  .card p + p{margin-top:9px}
+
+  /* ------------------------------------------------------- setup steps */
+  .setup{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+  .tabs{display:flex;border-bottom:1px solid var(--line);background:#FAFBFC}
+  .tabs button{
+    flex:1;appearance:none;border:0;background:none;font-family:inherit;
+    font-size:14px;font-weight:600;color:var(--ink2);padding:14px 6px;cursor:pointer;
+    border-bottom:2.5px solid transparent;transition:color .15s,border-color .15s;
+  }
+  .tabs button[aria-selected="true"]{color:var(--primary);border-bottom-color:var(--primary);background:#fff}
+  .panel{padding:6px 18px 18px;display:none}
+  .panel[data-active="true"]{display:block}
+
+  ol.steps{list-style:none;margin:0;padding:0;counter-reset:step}
+  ol.steps li{
+    counter-increment:step;display:flex;gap:14px;align-items:flex-start;
+    padding:15px 0;border-bottom:1px dashed var(--line);
+  }
+  ol.steps li:last-child{border-bottom:0}
+  ol.steps li::before{
+    content:counter(step);flex:0 0 27px;height:27px;border-radius:50%;
+    background:var(--primary-soft);color:var(--primary);
+    font-weight:800;font-size:13.5px;display:flex;align-items:center;justify-content:center;
+    margin-top:1px;
+  }
+  ol.steps .t{font-weight:650;font-size:15px}
+  ol.steps .d{color:var(--ink2);font-size:14px;margin-top:2px}
+  kbd{
+    background:var(--bg);border:1px solid var(--line);border-bottom-width:2px;
+    border-radius:6px;padding:1px 6px;font:inherit;font-size:.9em;font-weight:650;
+    color:var(--ink);white-space:nowrap;
+  }
+
+  .note{
+    display:flex;gap:11px;background:var(--amber-soft);border:1px solid #FDE68A;
+    border-radius:12px;padding:13px 15px;font-size:14px;color:#78350F;margin:16px 0 4px;
+  }
+  .note b{color:#78350F}
+  .note .ic{flex:0 0 auto;font-size:15px;line-height:1.5}
+
+  /* ------------------------------------------------------- checklist */
+  .checklist{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:6px 18px 18px;margin-top:12px}
+  .bar{height:6px;border-radius:99px;background:var(--bg);overflow:hidden;margin:16px 0 4px}
+  .bar span{display:block;height:100%;width:0;background:var(--primary);border-radius:99px;transition:width .3s ease}
+  .barlabel{font-size:12.5px;color:var(--ink3);font-weight:600;margin-bottom:12px}
+  .check{
+    display:flex;gap:12px;align-items:center;padding:12px 0;
+    border-bottom:1px dashed var(--line);cursor:pointer;user-select:none;
+  }
+  .check:last-of-type{border-bottom:0}
+  .box{
+    flex:0 0 22px;height:22px;border-radius:7px;border:2px solid var(--line);
+    display:flex;align-items:center;justify-content:center;color:#fff;
+    font-size:12px;font-weight:800;transition:background .15s,border-color .15s;
+  }
+  .check[data-done="true"] .box{background:var(--green);border-color:var(--green)}
+  .check[data-done="true"] .lbl{color:var(--ink3);text-decoration:line-through}
+  .lbl{font-size:15px;font-weight:550}
+  .done-msg{
+    display:none;background:var(--green-soft);border:1px solid #A7F3D0;color:#065F46;
+    border-radius:12px;padding:13px 15px;font-size:14.5px;font-weight:600;margin-top:14px;
+  }
+  .done-msg[data-show="true"]{display:block}
+
+  /* ------------------------------------------------- tabs of the app */
+  .feature{display:flex;gap:15px;align-items:flex-start;padding:17px 0;border-bottom:1px solid var(--line)}
+  .feature:last-child{border-bottom:0}
+  .fic{
+    flex:0 0 40px;height:40px;border-radius:12px;display:flex;align-items:center;
+    justify-content:center;font-size:19px;
+  }
+  .feature h3{margin:0 0 3px;font-size:16px;font-weight:700}
+  .feature p{margin:0;color:var(--ink2);font-size:14.5px}
+
+  /* --------------------------------------------------- notification */
+  .phone{
+    background:linear-gradient(165deg,#1E1B4B,#0F172A);border-radius:22px;
+    padding:20px 16px 24px;margin-top:6px;
+  }
+  .toast{
+    background:rgba(255,255,255,.97);border-radius:15px;padding:13px 14px;
+    box-shadow:0 10px 26px rgba(0,0,0,.3);margin-bottom:10px;
+  }
+  .toast:last-child{margin-bottom:0}
+  .toast .top{display:flex;align-items:center;gap:8px;margin-bottom:5px}
+  .toast .app{
+    width:17px;height:17px;border-radius:5px;background:var(--primary);color:#fff;
+    font-size:9px;font-weight:800;display:flex;align-items:center;justify-content:center;
+  }
+  .toast .name{font-size:11.5px;font-weight:700;color:var(--ink2);letter-spacing:.2px}
+  .toast .time{margin-left:auto;font-size:11px;color:var(--ink3)}
+  .toast .title{font-size:14.5px;font-weight:700;margin-bottom:2px}
+  .toast .body{font-size:13.5px;color:var(--ink2);white-space:pre-line;line-height:1.5}
+  .caption{color:var(--ink3);font-size:13px;text-align:center;margin-top:12px}
+
+  /* ---------------------------------------------------------- faq */
+  details{
+    background:var(--card);border:1px solid var(--line);border-radius:13px;
+    padding:0 16px;margin-bottom:9px;
+  }
+  details summary{
+    cursor:pointer;list-style:none;padding:15px 0;font-weight:650;font-size:15.5px;
+    display:flex;align-items:center;gap:10px;
+  }
+  details summary::-webkit-details-marker{display:none}
+  details summary::after{
+    content:'+';margin-left:auto;color:var(--ink3);font-weight:700;font-size:19px;line-height:1;
+  }
+  details[open] summary::after{content:'–'}
+  details .ans{padding:0 0 16px;color:var(--ink2);font-size:14.5px;margin:0}
+  details .ans p{margin:0 0 10px}
+  details .ans p:last-child{margin-bottom:0}
+
+  /* -------------------------------------------------------- footer */
+  .endcta{
+    background:var(--primary);color:#fff;border-radius:var(--radius);
+    padding:28px 22px;text-align:center;margin-top:34px;
+  }
+  .endcta h2{color:#fff;margin-bottom:6px}
+  .endcta p{color:#DDD9FB;margin:0 0 20px;font-size:15px}
+  .endcta a{
+    display:inline-block;background:#fff;color:var(--primary);text-decoration:none;
+    font-weight:700;padding:13px 28px;border-radius:11px;font-size:15.5px;
+  }
+  footer.sig{text-align:center;margin-top:38px;color:var(--ink3);font-size:13.5px;line-height:1.75}
+  footer.sig .by{color:var(--ink2);font-weight:700;font-size:14.5px}
+  footer.sig .rule{width:44px;height:3px;border-radius:99px;background:var(--primary-mid);margin:0 auto 16px}
+  footer.sig .wit{font-style:italic}
+  a.mail{color:var(--primary);text-decoration:none;font-weight:600}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="mark">AH</div>
+    <h1>Everything academic,<br>in one place.</h1>
+    <p>AcadHub is the batch's timetable, readings, course outlines and announcements —
+       on your phone, and it tells you what's coming <em>before</em> you need to know it.</p>
+    <a class="cta" href="https://iimcal-acadhub.netlify.app/" target="_blank" rel="noopener">Open AcadHub →</a>
+    <small>Sign in with your @email.iimcal.ac.in Google account. Nothing else needed.</small>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <!-- =========================================================== why -->
+  <section>
+    <p class="kicker">Why this exists</p>
+    <h2>The information was never missing. It was just scattered.</h2>
+    <p class="lede">
+      A timetable in one PDF, a room change in a WhatsApp forward, the reading for
+      Thursday buried in a course outline nobody opened since Week 1. AcadHub puts
+      all of it in one place and keeps it current, so the answer to "what's tomorrow
+      and what do I need to have read" takes five seconds.
+    </p>
+  </section>
+
+  <!-- ========================================================= setup -->
+  <section>
+    <p class="kicker">Step one</p>
+    <h2>Put it on your home screen</h2>
+    <p class="lede">
+      It's a web app — nothing to download from an app store. Adding it to your home
+      screen makes it open like any other app <strong>and is what allows it to send you
+      reminders</strong>. Two minutes, once.
+    </p>
+
+    <div class="setup">
+      <div class="tabs" role="tablist">
+        <button role="tab" aria-selected="true"  data-tab="ios">iPhone</button>
+        <button role="tab" aria-selected="false" data-tab="android">Android</button>
+        <button role="tab" aria-selected="false" data-tab="laptop">Laptop</button>
+      </div>
+
+      <div class="panel" data-panel="ios" data-active="true">
+        <ol class="steps">
+          <li><div><div class="t">Open the link in Safari</div>
+            <div class="d">It has to be Safari on iPhone — Chrome cannot install web apps on iOS.</div></div></li>
+          <li><div><div class="t">Tap <kbd>Share</kbd> ⬆︎ at the bottom</div>
+            <div class="d">The square with the arrow coming out of it.</div></div></li>
+          <li><div><div class="t">Scroll down → <kbd>Add to Home Screen</kbd></div>
+            <div class="d">Then tap <kbd>Add</kbd>. The AcadHub icon appears with your other apps.</div></div></li>
+          <li><div><div class="t">Open it from the home screen icon</div>
+            <div class="d">Not from Safari — from the icon. This matters for the next step.</div></div></li>
+          <li><div><div class="t">Profile → turn on <kbd>Reminders</kbd></div>
+            <div class="d">Say yes when iOS asks. That's it.</div></div></li>
+        </ol>
+        <div class="note"><span class="ic">⚠️</span>
+          <div><b>iPhones are fussy about this one thing:</b> notifications only work if
+          you opened the app from the home-screen icon. If the reminders switch looks
+          greyed out, you're still in Safari. Close it, tap the icon, try again.
+          Needs iOS 16.4 or newer.</div>
+        </div>
+      </div>
+
+      <div class="panel" data-panel="android">
+        <ol class="steps">
+          <li><div><div class="t">Open the link in Chrome</div></div></li>
+          <li><div><div class="t">Tap <kbd>⋮</kbd> → <kbd>Add to Home screen</kbd></div>
+            <div class="d">Chrome often offers an <kbd>Install app</kbd> banner on its own — either works.</div></div></li>
+          <li><div><div class="t">Confirm <kbd>Install</kbd></div>
+            <div class="d">The icon lands in your app drawer like anything from Play Store.</div></div></li>
+          <li><div><div class="t">Profile → turn on <kbd>Reminders</kbd></div>
+            <div class="d">Allow notifications when Android asks.</div></div></li>
+        </ol>
+      </div>
+
+      <div class="panel" data-panel="laptop">
+        <ol class="steps">
+          <li><div><div class="t">Open the link in Chrome or Edge</div></div></li>
+          <li><div><div class="t">Click the <kbd>⊕ Install</kbd> icon in the address bar</div>
+            <div class="d">Right-hand end, next to the bookmark star.</div></div></li>
+          <li><div><div class="t">Profile → <kbd>Reminders</kbd></div>
+            <div class="d">Useful if your laptop is the thing that's always open.</div></div></li>
+        </ol>
+        <div class="note"><span class="ic">💡</span>
+          <div>You can install it on both. Reminders are per-device, so turn them on
+          wherever you'll actually see them.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ------------------------------------------------- checklist -->
+    <div class="checklist">
+      <div class="bar"><span id="bar"></span></div>
+      <div class="barlabel" id="barlabel">0 of 4 done</div>
+
+      <div class="check" data-done="false"><div class="box">✓</div>
+        <div class="lbl">Signed in with my IIMC Google account</div></div>
+      <div class="check" data-done="false"><div class="box">✓</div>
+        <div class="lbl">Added AcadHub to my home screen</div></div>
+      <div class="check" data-done="false"><div class="box">✓</div>
+        <div class="lbl">Turned reminders on in Profile</div></div>
+      <div class="check" data-done="false"><div class="box">✓</div>
+        <div class="lbl">Picked my electives under Calendar → My courses</div></div>
+
+      <div class="done-msg" id="donemsg">
+        You're set. You'll get a nudge tomorrow evening with what's on the next day.
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================= inside -->
+  <section>
+    <p class="kicker">What's inside</p>
+    <h2>Four tabs, and that's the whole app</h2>
+    <p class="lede">Nothing to learn. Here's what each one is for.</p>
+
+    <div class="card" style="padding:4px 20px">
+      <div class="feature">
+        <div class="fic" style="background:var(--primary-soft);color:var(--primary)">📣</div>
+        <div><h3>Announcements</h3>
+          <p>Everything the batch needs to know, sorted and tagged — academics, workshops,
+             speaker sessions, general. Time-critical things are pinned to the top and
+             quietly drop off once they're over, so the feed doesn't turn into an archive
+             you scroll past.</p></div>
+      </div>
+      <div class="feature">
+        <div class="fic" style="background:var(--green-soft);color:var(--green)">🗓️</div>
+        <div><h3>Calendar</h3>
+          <p>Your actual timetable — session times, rooms, faculty, and the campus events
+             everyone is expected at. Under <strong>My courses</strong> you pick the electives
+             you've taken, and the calendar becomes yours instead of the batch's.</p></div>
+      </div>
+      <div class="feature">
+        <div class="fic" style="background:var(--amber-soft);color:var(--amber)">📚</div>
+        <div><h3>Subjects</h3>
+          <p>One page per course: faculty, textbook, the grading breakdown, and the
+             session-by-session plan lifted straight from the course outline — which
+             chapter, which case, which assignment is due. Plus any slides or files
+             shared for it.</p></div>
+      </div>
+      <div class="feature">
+        <div class="fic" style="background:#F1F5F9;color:var(--ink2)">👤</div>
+        <div><h3>Profile</h3>
+          <p>Reminders on or off, and that's about it. No settings maze.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================ notifications -->
+  <section>
+    <p class="kicker">The part that's actually useful</p>
+    <h2>It tells you the night before</h2>
+    <p class="lede">
+      Around <strong>8 PM</strong>, AcadHub sends one message with tomorrow's sessions —
+      including the reading and the case for each. The night before, not the morning of,
+      because a reading you learn about at 9:40 AM is a reading you didn't do.
+    </p>
+
+    <div class="phone">
+      <div class="toast">
+        <div class="top"><div class="app">A</div><div class="name">ACADHUB</div><div class="time">now</div></div>
+        <div class="title">Prepare for tomorrow · 3 sessions</div>
+        <div class="body">10:15 AM — OM-EX104 · System Modeling and Analysis using Simulation
+Reading: [RS] Ch. 13 · Amphi 100 East</div>
+      </div>
+      <div class="toast">
+        <div class="top"><div class="app">A</div><div class="name">ACADHUB</div><div class="time">1w ago</div></div>
+        <div class="title">Leadership Talk Series</div>
+        <div class="body">Wednesday, 2 September · compulsory for the batch</div>
+      </div>
+    </div>
+    <p class="caption">One message a day, at most. You can switch it off in Profile whenever.</p>
+  </section>
+
+  <!-- ============================================================ faq -->
+  <section>
+    <p class="kicker">Before you ask</p>
+    <h2>Fair questions</h2>
+
+    <details>
+      <summary>Is this official?</summary>
+      <div class="ans"><p>It's built and run by your Academic Representative for the batch —
+      it isn't an institute system. Treat it as the fastest place to find something,
+      and the notice board or PGP office as the last word if the two ever disagree.</p></div>
+    </details>
+
+    <details>
+      <summary>What can it see about me?</summary>
+      <div class="ans">
+        <p>Your name and IIMC email, from the Google sign-in. That's the lot. It cannot
+        read your mail, your files or your contacts, and it never asks to.</p>
+        <p>If you choose to connect your own calendar, those entries stay private to you —
+        nobody else in the batch can see them, and neither can I.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>Can anyone outside the batch get in?</summary>
+      <div class="ans"><p>No. Sign-in is restricted to @email.iimcal.ac.in accounts, and the
+      database checks who you are on every single request rather than trusting the app —
+      so there's no URL you could send someone that would show them anything.</p></div>
+    </details>
+
+    <details>
+      <summary>The timetable changed. Will the app know?</summary>
+      <div class="ans"><p>Yes — reschedules, room changes and additions are updated centrally
+      and appear for everyone at once, which is rather the point. If you spot something
+      wrong, tell me and it's a two-minute fix for the whole batch.</p></div>
+    </details>
+
+    <details>
+      <summary>Too many notifications?</summary>
+      <div class="ans"><p>There's one switch in Profile and it turns everything off
+      immediately. The app still works fine without them.</p></div>
+    </details>
+
+    <details>
+      <summary>Does it work offline?</summary>
+      <div class="ans"><p>Partly — once installed it opens and shows what it last loaded,
+      which covers you in the basement of the library. It needs a connection to pick up
+      anything new.</p></div>
+    </details>
+  </section>
+
+  <div class="endcta">
+    <h2>Two minutes. Then never wonder again.</h2>
+    <p>Add it once tonight and let it do the remembering.</p>
+    <a href="https://iimcal-acadhub.netlify.app/" target="_blank" rel="noopener">Open AcadHub</a>
+  </div>
+
+  <footer class="sig">
+    <div class="rule"></div>
+    <div class="by">Built by Akshat Verma</div>
+    <div>Academic Representative · MBAEx Batch 20 · IIM Calcutta</div>
+    <div class="wit" style="margin-top:10px">
+      Written between classes, so that nobody has to scroll<br>four hundred messages to find out where class is.
+    </div>
+    <div style="margin-top:14px">
+      Something wrong or missing? <a class="whatsapp" href="https://wa.me/918094966697">Tell me</a>
+      and it's fixed for everyone.
+    </div>
+  </footer>
+</div>
+
+<script>
+  // Device tabs for the install instructions.
+  const tabs = document.querySelectorAll('.tabs button');
+  const panels = document.querySelectorAll('.panel');
+  tabs.forEach(function (t) {
+    t.addEventListener('click', function () {
+      tabs.forEach(function (o) { o.setAttribute('aria-selected', String(o === t)); });
+      panels.forEach(function (p) {
+        p.setAttribute('data-active', String(p.dataset.panel === t.dataset.tab));
+      });
+    });
+  });
+
+  // A checklist you can tick as you go. Deliberately not saved anywhere —
+  // it is a four-step nudge, not a record of anything.
+  const checks = Array.prototype.slice.call(document.querySelectorAll('.check'));
+  const bar = document.getElementById('bar');
+  const label = document.getElementById('barlabel');
+  const doneMsg = document.getElementById('donemsg');
+
+  function refresh() {
+    const n = checks.filter(function (c) { return c.dataset.done === 'true'; }).length;
+    bar.style.width = (n / checks.length * 100) + '%';
+    label.textContent = n + ' of ' + checks.length + ' done';
+    doneMsg.setAttribute('data-show', String(n === checks.length));
+  }
+  checks.forEach(function (c) {
+    c.addEventListener('click', function () {
+      c.dataset.done = c.dataset.done === 'true' ? 'false' : 'true';
+      refresh();
+    });
+  });
+  refresh();
+</script>
+</body>
+</html>

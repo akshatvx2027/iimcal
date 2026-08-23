@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>IIMC Campus Apps</title>
+<meta name="description" content="The student-built apps for IIM Calcutta — academics, laundry and campus services, all in one place.">
+<meta name="theme-color" content="#0F172A">
+<style>
+  :root{
+    --ink:#0F172A; --ink2:#475569; --ink3:#94A3B8;
+    --line:#E2E8F0; --bg:#F8FAFC; --card:#FFFFFF;
+    --indigo:#4338CA; --indigo-soft:#EEF2FF;
+    --cyan:#0E7490;   --cyan-soft:#ECFEFF;
+    --amber:#B45309;  --amber-soft:#FFFBEB;
+    --font:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;font-family:var(--font);background:var(--bg);color:var(--ink);
+    line-height:1.6;-webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:760px;margin:0 auto;padding:0 18px 70px}
+
+  /* ------------------------------------------------------------ hero */
+  header.hero{
+    background:
+      radial-gradient(900px 380px at 15% -10%, rgba(67,56,202,.55), transparent 60%),
+      radial-gradient(700px 360px at 90% 0%, rgba(14,116,144,.42), transparent 62%),
+      linear-gradient(170deg,#111827,#0F172A 60%,#020617);
+    color:#fff;padding:60px 18px 66px;text-align:center;
+  }
+  .hero-inner{max-width:760px;margin:0 auto}
+  .crest{
+    font-size:11.5px;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;
+    color:#93A3B8;margin-bottom:16px;
+  }
+  .hero h1{
+    font-size:clamp(32px,7.5vw,46px);line-height:1.12;margin:0 0 14px;
+    font-weight:800;letter-spacing:-1px;
+  }
+  .hero p{margin:0 auto;max-width:32em;color:#CBD5E1;font-size:16.5px}
+  .pills{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:26px}
+  .pill{
+    background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);
+    border-radius:99px;padding:6px 14px;font-size:13px;color:#E2E8F0;font-weight:600;
+  }
+
+  /* ----------------------------------------------------------- cards */
+  .intro{margin:34px 0 18px}
+  .intro h2{font-size:22px;font-weight:800;letter-spacing:-.4px;margin:0 0 6px}
+  .intro p{margin:0;color:var(--ink2);font-size:15.5px}
+
+  .app{
+    background:var(--card);border:1px solid var(--line);border-radius:18px;
+    padding:24px;margin-bottom:16px;position:relative;overflow:hidden;
+    transition:transform .18s ease, box-shadow .18s ease;
+  }
+  .app::before{
+    content:'';position:absolute;inset:0 auto 0 0;width:5px;background:var(--accent);
+  }
+  .app:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgba(15,23,42,.09)}
+  .app .head{display:flex;gap:15px;align-items:flex-start;margin-bottom:14px}
+  .icon{
+    flex:0 0 52px;height:52px;border-radius:15px;background:var(--soft);color:var(--accent);
+    display:flex;align-items:center;justify-content:center;font-size:24px;
+  }
+  .app h3{margin:0;font-size:20px;font-weight:800;letter-spacing:-.3px}
+  .tagline{margin:2px 0 0;color:var(--accent);font-size:13.5px;font-weight:650}
+  .app .desc{margin:0 0 16px;color:var(--ink2);font-size:15px}
+  ul.does{list-style:none;margin:0 0 18px;padding:0;display:grid;gap:7px}
+  ul.does li{position:relative;padding-left:22px;font-size:14.5px;color:var(--ink2)}
+  ul.does li::before{
+    content:'';position:absolute;left:4px;top:9px;width:7px;height:7px;border-radius:50%;
+    background:var(--accent);opacity:.65;
+  }
+  .foot{display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+        border-top:1px solid var(--line);padding-top:15px}
+  .open{
+    background:var(--accent);color:#fff;text-decoration:none;font-weight:700;font-size:15px;
+    padding:11px 22px;border-radius:11px;display:inline-block;
+  }
+  .open:active{transform:translateY(1px)}
+  .built{font-size:13px;color:var(--ink3);margin-left:auto;text-align:right;line-height:1.45}
+  .built b{color:var(--ink2);font-weight:650}
+
+  .guidelink{
+    display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:650;
+    color:var(--accent);text-decoration:none;
+  }
+
+  /* ---------------------------------------------------------- notes */
+  .strip{
+    background:var(--card);border:1px solid var(--line);border-radius:16px;
+    padding:20px 22px;margin-top:26px;
+  }
+  .strip h3{margin:0 0 6px;font-size:16.5px;font-weight:750}
+  .strip p{margin:0;color:var(--ink2);font-size:14.5px}
+  .strip p + p{margin-top:9px}
+
+  /* --------------------------------------------------------- footer */
+  footer.sig{text-align:center;margin-top:40px;color:var(--ink3);font-size:13.5px;line-height:1.8}
+  footer.sig .rule{width:44px;height:3px;border-radius:99px;background:#C7D2FE;margin:0 auto 16px}
+  footer.sig .by{color:var(--ink2);font-weight:700;font-size:14.5px}
+  footer.sig .wit{font-style:italic;margin-top:10px}
+  a.mail{color:var(--indigo);text-decoration:none;font-weight:600}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="crest">IIM Calcutta</div>
+    <h1>Campus, in few taps.</h1>
+    <p>The apps students built for students — what's on tomorrow, whether a washer is free,
+       and where to get lunch, a printout or help at 11 PM.</p>
+    <div class="pills">
+      <span class="pill">Academics</span>
+      <span class="pill">Laundry</span>
+      <span class="pill">Food &amp; services</span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="intro">
+    <h2>Three apps, no app store</h2>
+    <p>All of them open straight in your browser and can be added to your home screen.
+       Bookmark this page and you'll never need to hunt for the links again.</p>
+  </div>
+
+  <!-- ======================================================= AcadHub -->
+  <article class="app" style="--accent:var(--indigo);--soft:var(--indigo-soft)">
+    <div class="head">
+      <div class="icon">📚</div>
+      <div>
+        <h3>AcadHub</h3>
+        <p class="tagline">Everything academic, in one place</p>
+      </div>
+    </div>
+    <p class="desc">
+      Your timetable, course outlines, readings and batch announcements — and a nudge
+      the night before with what's on tomorrow, so you know what to have read.
+    </p>
+    <ul class="does">
+      <li>Live timetable with rooms, faculty and your own elective picks</li>
+      <li>Session-by-session readings and cases, straight from the course outline</li>
+      <li>Grading breakdown for every subject</li>
+      <li>Pinned announcements for workshops, talks and deadlines</li>
+      <li>One reminder at 8 PM for the next day — or none, your choice</li>
+    </ul>
+    <div class="foot">
+      <a class="open" href="https://iimcal-acadhub.netlify.app/" target="_blank" rel="noopener">Open AcadHub</a>
+      <a class="guidelink" href="./acadhub-guide.html">Setup guide →</a>
+      <div class="built">Built by <b>Akshat Verma</b></div>
+    </div>
+  </article>
+
+  <!-- ================================================== Laundry Room -->
+  <article class="app" style="--accent:var(--cyan);--soft:var(--cyan-soft)">
+    <div class="head">
+      <div class="icon">🧺</div>
+      <div>
+        <h3>Laundry Room</h3>
+        <p class="tagline">Check before you carry the bucket down</p>
+      </div>
+    </div>
+    <p class="desc">
+      Live status of the MDC machines. Check in when you start, see what's free,
+      and join the queue instead of standing next to a running washer.
+    </p>
+    <ul class="does">
+      <li>Four washers and two dryers, with who's using what right now</li>
+      <li>Check in when you load — everyone else can see the machine is taken</li>
+      <li>Waitlist when it's all full, and a ping when your turn comes</li>
+      <li>Washers auto-clear after 2 hours, dryers after 1</li>
+    </ul>
+    <div class="foot">
+      <a class="open" href="https://whatsyourlaksh.github.io/iimcalmdclaundry/laundry.html" target="_blank" rel="noopener">Open Laundry Room</a>
+      <!-- Swap in the builder's name here when you have it. -->
+      <div class="built">Built by <b>Laksh Agarwal</b></div>
+    </div>
+  </article>
+
+  <!-- ================================================= IIMC OneStop -->
+  <article class="app" style="--accent:var(--amber);--soft:var(--amber-soft)">
+    <div class="head">
+      <div class="icon">🍽️</div>
+      <div>
+        <h3>IIMC OneStop</h3>
+        <p class="tagline">Food, laundry, xerox &amp; help — one tap away</p>
+      </div>
+    </div>
+    <p class="desc">
+      The campus directory you actually needed in Week 1: what's open, where it is,
+      and the number to call when something goes wrong.
+    </p>
+    <ul class="does">
+      <li>Cafeterias and mess points, with menus and hours</li>
+      <li>Open-or-closed status at a glance, right now</li>
+      <li>Xerox and printing, laundry and other campus services</li>
+      <li>Lost &amp; found, leave intimation, medical and emergency contacts</li>
+    </ul>
+    <div class="foot">
+      <a class="open" href="https://campus-app-ivory.vercel.app/" target="_blank" rel="noopener">Open OneStop</a>
+      <!-- Swap in the builder's name here when you have it. -->
+      <div class="built">Built by <b>Aashish Raj</b></div>
+    </div>
+  </article>
+
+  <div class="strip">
+    <h3>Add them to your home screen</h3>
+    <p>
+      <b>iPhone:</b> open in Safari → <b>Share</b> ⬆︎ → <b>Add to Home Screen</b>.
+      <b>Android:</b> open in Chrome → <b>⋮</b> → <b>Install app</b>.
+    </p>
+    <p>
+      They then behave like any other app — full screen, their own icon, and in
+      AcadHub's case, able to send you reminders.
+    </p>
+  </div>
+
+  <div class="strip">
+    <h3>Built by students, so tell us when they're wrong</h3>
+    <p>
+      None of these are institute systems. They're side projects that got useful,
+      which means they're only as accurate as what people report back. A wrong room,
+      a machine that's actually free, a canteen that's changed its hours — send it
+      along and it's fixed for everyone.
+    </p>
+  </div>
+
+  <footer class="sig">
+    <div class="rule"></div>
+    <div class="by">From the batchmates, Of the batchmates, By the batchmates</div>
+    <div>MBAEx Batch 20 · IIM Calcutta</div>
+    <div class="wit">
+      Three links, one page — because the fourth place you look<br>
+      for something should not have to be the group chat.
+    </div>
+    <div style="margin-top:14px">
+      Built something the batch should know about?
+      <a class="whatsapp" href="https://wa.me/918094966697">Send it over</a>
+      and it goes on this page.
+    </div>
+  </footer>
+</div>
+</body>
+</html>
