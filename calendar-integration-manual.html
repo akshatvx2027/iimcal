@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>AcadHub Calendar Integration Manual</title>
+<meta name="description" content="Step-by-step guide to sync your AcadHub timetable with Google Calendar and add classes to your phone's calendar.">
+<meta name="theme-color" content="#4338CA">
+<style>
+  :root{
+    --primary:#4338CA; --primary-soft:#EEF2FF; --primary-mid:#C7D2FE;
+    --ink:#0F172A; --ink2:#475569; --ink3:#94A3B8;
+    --line:#E2E8F0; --bg:#F1F5F9; --card:#FFFFFF;
+    --green:#047857; --green-soft:#ECFDF5;
+    --amber:#B45309; --amber-soft:#FFFBEB;
+    --radius:16px;
+    --font:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0; font-family:var(--font); background:var(--bg); color:var(--ink);
+    line-height:1.6; -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:760px; margin:0 auto; padding:0 18px 72px}
+
+  header.hero{
+    background:linear-gradient(160deg,#4338CA 0%,#3730A3 55%,#312E81 100%);
+    color:#fff; padding:52px 18px 60px; text-align:center;
+  }
+  .hero-inner{max-width:760px;margin:0 auto}
+  .mark{
+    width:64px;height:64px;border-radius:18px;background:rgba(255,255,255,.14);
+    border:1px solid rgba(255,255,255,.28);
+    display:flex;align-items:center;justify-content:center;margin:0 auto 18px;
+    font-size:26px;font-weight:800;letter-spacing:-1px;
+  }
+  .hero h1{font-size:clamp(28px,6vw,40px);line-height:1.15;margin:0 0 12px;font-weight:800;letter-spacing:-.8px}
+  .hero p{margin:0 auto;max-width:30em;font-size:16px;color:#DDD9FB}
+
+  section{margin-top:34px}
+  .kicker{
+    font-size:11.5px;font-weight:700;letter-spacing:.9px;text-transform:uppercase;
+    color:var(--ink3);margin:0 0 4px;
+  }
+  h2{font-size:23px;font-weight:800;letter-spacing:-.4px;margin:0 0 6px}
+  .lede{color:var(--ink2);margin:0 0 18px;font-size:15.5px}
+
+  .card{
+    background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    padding:20px;margin-bottom:12px;
+  }
+  .card h3{margin:0 0 4px;font-size:16.5px;font-weight:700}
+  .card p{margin:0;color:var(--ink2);font-size:14.5px}
+  .card p + p{margin-top:9px}
+
+  .setup{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+  .tabs{display:flex;border-bottom:1px solid var(--line);background:#FAFBFC}
+  .tabs button{
+    flex:1;appearance:none;border:0;background:none;font-family:inherit;
+    font-size:14px;font-weight:600;color:var(--ink2);padding:14px 6px;cursor:pointer;
+    border-bottom:2.5px solid transparent;transition:color .15s,border-color .15s;
+  }
+  .tabs button[aria-selected="true"]{color:var(--primary);border-bottom-color:var(--primary);background:#fff}
+  .panel{padding:6px 18px 18px;display:none}
+  .panel[data-active="true"]{display:block}
+
+  ol.steps{list-style:none;margin:0;padding:0;counter-reset:step}
+  ol.steps li{
+    counter-increment:step;display:flex;gap:14px;align-items:flex-start;
+    padding:15px 0;border-bottom:1px dashed var(--line);
+  }
+  ol.steps li:last-child{border-bottom:0}
+  ol.steps li::before{
+    content:counter(step);flex:0 0 27px;height:27px;border-radius:50%;
+    background:var(--primary-soft);color:var(--primary);
+    font-weight:800;font-size:13.5px;display:flex;align-items:center;justify-content:center;
+    margin-top:1px;
+  }
+  ol.steps .t{font-weight:650;font-size:15px}
+  ol.steps .d{color:var(--ink2);font-size:14px;margin-top:2px}
+  kbd{
+    background:var(--bg);border:1px solid var(--line);border-bottom-width:2px;
+    border-radius:6px;padding:1px 6px;font:inherit;font-size:.9em;font-weight:650;
+    color:var(--ink);white-space:nowrap;
+  }
+
+  .note{
+    display:flex;gap:11px;background:var(--amber-soft);border:1px solid #FDE68A;
+    border-radius:12px;padding:13px 15px;font-size:14px;color:#78350F;margin:16px 0 4px;
+  }
+  .note b{color:#78350F}
+  .note.info{background:var(--primary-soft);border:1px solid var(--primary-mid);color:var(--primary)}
+  .note.info b{color:var(--primary)}
+  .note .ic{flex:0 0 auto;font-size:15px;line-height:1.5}
+
+  .feature{display:flex;gap:15px;align-items:flex-start;padding:17px 0;border-bottom:1px solid var(--line)}
+  .feature:last-child{border-bottom:0}
+  .fic{
+    flex:0 0 40px;height:40px;border-radius:12px;display:flex;align-items:center;
+    justify-content:center;font-size:19px;
+  }
+  .feature h3{margin:0 0 3px;font-size:16px;font-weight:700}
+  .feature p{margin:0;color:var(--ink2);font-size:14.5px}
+
+  .step-image{
+    max-width:100%;height:auto;border-radius:12px;border:1px solid var(--line);
+    margin:12px 0;display:block;
+  }
+
+  footer.sig{text-align:center;margin-top:38px;color:var(--ink3);font-size:13.5px;line-height:1.75}
+  footer.sig .by{color:var(--ink2);font-weight:700;font-size:14.5px}
+  footer.sig .rule{width:44px;height:3px;border-radius:99px;background:var(--primary-mid);margin:0 auto 16px}
+  footer.sig .wit{font-style:italic}
+  a.mail{color:var(--primary);text-decoration:none;font-weight:600}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="mark">📅</div>
+    <h1>Calendar Integration</h1>
+    <p>Sync your AcadHub timetable with Google Calendar and add classes to your phone's calendar app in two ways.</p>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <!-- ================================================================ method 1 -->
+  <section>
+    <p class="kicker">Method 1</p>
+    <h2>Add your courses to Google Calendar</h2>
+    <p class="lede">
+      Get a shareable link to all your courses. Paste it into Google Calendar and everything syncs automatically
+      when class times change.
+    </p>
+
+    <div class="card">
+      <h3>🗓️ Your personal course link</h3>
+      <p>This link contains only the courses you're taking. It updates itself when a class moves or is cancelled,
+         so your Google Calendar always has the latest schedule. Treat it like a password — anyone with this link
+         can see your timetable.</p>
+    </div>
+
+    <div class="setup">
+      <div class="tabs" role="tablist">
+        <button role="tab" aria-selected="true"  data-tab="getcourse">Get your link</button>
+        <button role="tab" aria-selected="false" data-tab="addgcal">Add to Google Calendar</button>
+      </div>
+
+      <div class="panel" data-panel="getcourse" data-active="true">
+        <ol class="steps">
+          <li><div><div class="t">Open AcadHub on your phone</div>
+            <div class="d">Go to the Calendar tab (🗓️ at the bottom).</div></div></li>
+          <li><div><div class="t">Scroll down to <kbd>My courses</kbd> section</div>
+            <div class="d">Under "Add these classes to my phone's calendar" you'll see a box with a link.</div></div></li>
+          <li><div><div class="t">Tap <kbd>Copy link</kbd></div>
+            <div class="d">The link is now in your clipboard. It looks like: <code style="background:#F1F5F9;padding:2px 6px;border-radius:4px;font-size:13px">https://iimcal-acadhub.netlify.app/cal/...</code></div></div></li>
+          <li><div><div class="t">Keep this link safe</div>
+            <div class="d">Anyone with this link can see your timetable. Don't share it publicly, but you can paste it into your personal calendar apps.</div></div></li>
+        </ol>
+
+        <img src="./images/01-acadhub-calendar-link.jpg" alt="AcadHub Calendar tab showing course link and copy button" class="step-image">
+
+        <div class="note info"><span class="ic">ℹ️</span>
+          <div><b>Personal to you.</b> This link is unique — it has only YOUR courses, not the whole batch.
+          If you take electives nobody else does, they won't show up on anyone's calendar but yours.</div>
+        </div>
+      </div>
+
+      <div class="panel" data-panel="addgcal">
+        <ol class="steps">
+          <li><div><div class="t">Open Google Calendar on your computer</div>
+            <div class="d">Go to <kbd>calendar.google.com</kbd></div></div></li>
+          <li><div><div class="t">On the left sidebar, find <kbd>Other calendars</kbd></div>
+            <div class="d">Click the <kbd>+</kbd> button next to it.</div></div></li>
+          <li><div><div class="t">Choose <kbd>Subscribe to calendar</kbd></div>
+            <div class="d">A text field appears asking for a URL.</div></div></li>
+          <li><div><div class="t">Paste your AcadHub course link</div>
+            <div class="d">The link you copied earlier from the Calendar tab.</div></div></li>
+          <li><div><div class="t">Click <kbd>Subscribe</kbd></div>
+            <div class="d">Google Calendar imports all your courses.</div></div></li>
+          <li><div><div class="t">You'll see your schedule in Google Calendar</div>
+            <div class="d">It appears on your phone's Google Calendar app automatically. Changes sync within an hour.</div></div></li>
+        </ol>
+
+        <img src="./images/03-google-calendar-view.jpg" alt="Google Calendar showing all imported AcadHub courses" class="step-image">
+
+        <div class="note info"><span class="ic">✓</span>
+          <div><b>Auto-synced.</b> Whenever a class is rescheduled or moved to a different room, your Google Calendar
+          updates automatically. You don't have to do anything.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================================ method 2 -->
+  <section>
+    <p class="kicker">Method 2</p>
+    <h2>Link your Google Calendar to AcadHub</h2>
+    <p class="lede">
+      Connect your personal Google Calendar to AcadHub using a secret code. Then AcadHub can see when you're busy
+      with other commitments — interviews, projects, travel — and warn you about schedule conflicts.
+    </p>
+
+    <div class="setup">
+      <div class="tabs" role="tablist">
+        <button role="tab" aria-selected="true"  data-tab="secret">Generate your secret</button>
+        <button role="tab" aria-selected="false" data-tab="integrate">Link it to Google</button>
+      </div>
+
+      <div class="panel" data-panel="secret" data-active="true">
+        <ol class="steps">
+          <li><div><div class="t">Open AcadHub on your phone</div>
+            <div class="d">Go to the Calendar tab (🗓️ at the bottom).</div></div></li>
+          <li><div><div class="t">Scroll down to <kbd>Link your Google Calendar</kbd></div>
+            <div class="d">You'll see a button that says "Generate secret" or similar.</div></div></li>
+          <li><div><div class="t">Tap the button to generate your secret code</div>
+            <div class="d">A unique code appears. It looks like: <code style="background:#F1F5F9;padding:2px 6px;border-radius:4px;font-size:13px">gcal-secret-abc123xyz789...</code></div></div></li>
+          <li><div><div class="t">Copy this code</div>
+            <div class="d">Long-press and select "Copy". You'll paste it into Google Calendar next.</div></div></li>
+          <li><div><div class="t">Save this secret somewhere safe</div>
+            <div class="d">You only need it once. If you lose it, you can generate a new one anytime from this same screen.</div></div></li>
+        </ol>
+
+        <img src="./images/01-acadhub-calendar-link.jpg" alt="AcadHub Calendar tab showing secret code generation" class="step-image">
+
+        <div class="note info"><span class="ic">🔒</span>
+          <div><b>One-way access.</b> This secret only lets AcadHub <em>read</em> your calendar. It cannot add events,
+          delete things, or edit anything. Your Google Calendar stays completely under your control.</div>
+        </div>
+      </div>
+
+      <div class="panel" data-panel="integrate">
+        <ol class="steps">
+          <li><div><div class="t">Go to Google Calendar Settings</div>
+            <div class="d">On <kbd>calendar.google.com</kbd>, click the gear icon (⚙️) and choose <kbd>Settings</kbd>.</div></div></li>
+          <li><div><div class="t">On the left, click <kbd>Integrate calendar</kbd></div>
+            <div class="d">It's in the "Settings for my calendars" section.</div></div></li>
+          <li><div><div class="t">Find the <kbd>Secret address in iCal format</kbd> box</div>
+            <div class="d">This is where you'll paste the code from AcadHub.</div></div></li>
+          <li><div><div class="t">Paste your AcadHub secret code</div>
+            <div class="d">The code you copied from AcadHub goes into this field.</div></div></li>
+          <li><div><div class="t">Save the changes</div>
+            <div class="d">Google Calendar now has permission to read your calendar.</div></div></li>
+          <li><div><div class="t">Done — AcadHub can now see your busy times</div>
+            <div class="d">The next time you check AcadHub's Calendar tab, it will show conflicts and warn you about double-bookings.</div></div></li>
+        </ol>
+
+        <img src="./images/04-integrate-calendar.jpg" alt="Google Calendar Settings showing Integrate calendar option" class="step-image">
+        <img src="./images/02-google-settings.jpg" alt="Google Calendar Calendar settings page with integrate option highlighted" class="step-image">
+
+        <div class="note info"><span class="ic">✓</span>
+          <div><b>What this does:</b> AcadHub now knows when you have interviews, project work, or personal plans booked.
+          It can alert you if a class conflicts with something you've already committed to.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:18px">
+      <div class="feature">
+        <div class="fic" style="background:#ECFDF5;color:var(--green)">⚠️</div>
+        <div><h3>Conflict warnings</h3>
+          <p>If a club or group asks you to a meeting at 3 PM and you have an interview booked then, AcadHub will flag it
+             in red so you know there's a clash.</p></div>
+      </div>
+      <div class="feature">
+        <div class="fic" style="background:#FFFBEB;color:var(--amber)">👀</div>
+        <div><h3>See it all together</h3>
+          <p>The Calendar tab shows your classes, your personal events, and campus deadlines in one unified view.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================================ faq -->
+  <section>
+    <p class="kicker">Questions</p>
+    <h2>Common issues & answers</h2>
+
+    <div class="card">
+      <h3>The Google Calendar link didn't work</h3>
+      <p>Make sure you're in the right place: Google Calendar Settings → left sidebar → "Integrate calendar" → paste into
+         the field that says "Secret address in iCal format". If it still doesn't work, generate a new secret code from AcadHub
+         and try again.</p>
+    </div>
+
+    <div class="card">
+      <h3>I lost my course link — how do I get it again?</h3>
+      <p>Go back to AcadHub → Calendar tab → "My courses" → and tap "Copy link" again. It's the same link, so if you already
+         added it to Google Calendar, you don't need to do anything — it's still syncing.</p>
+    </div>
+
+    <div class="card">
+      <h3>I want to revoke access — how do I do that?</h3>
+      <p>Go back to AcadHub's Calendar tab and tap "Revoke secret". This disables the connection immediately. You can always
+         generate a new secret later if you change your mind.</p>
+    </div>
+
+    <div class="card">
+      <h3>Can I undo the Google Calendar link?</h3>
+      <p>Yes. In Google Calendar Settings → "Integrate calendar" → delete or clear the secret code field. Your calendar link
+         (Method 1) stays active separately — they're two independent connections.</p>
+    </div>
+
+    <div class="card">
+      <h3>Who can see my timetable?</h3>
+      <p>Anyone with your course link (Method 1) can see it. The secret code (Method 2) is read-only and only works in Google
+         Calendar. Never share either one publicly — treat them like passwords.</p>
+    </div>
+  </section>
+
+  <footer class="sig">
+    <div class="rule"></div>
+    <div class="by">AcadHub Calendar Integration</div>
+    <div>For MBAEx Batch 20 · IIM Calcutta</div>
+    <div class="wit" style="margin-top:10px">
+      Two ways to sync. Pick whichever fits how you use your calendar.
+    </div>
+  </footer>
+</div>
+
+<script>
+  // Tabs — works for multiple tab groups independently.
+  const tabGroups = document.querySelectorAll('.setup');
+  tabGroups.forEach(function (group) {
+    const tabs = group.querySelectorAll('.tabs button');
+    const panels = group.querySelectorAll('.panel');
+    tabs.forEach(function (t) {
+      t.addEventListener('click', function () {
+        tabs.forEach(function (o) { o.setAttribute('aria-selected', String(o === t)); });
+        panels.forEach(function (p) {
+          p.setAttribute('data-active', String(p.dataset.panel === t.dataset.tab));
+        });
+      });
+    });
+  });
+</script>
+</body>
+</html>
