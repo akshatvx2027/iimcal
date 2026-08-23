@@ -161,7 +161,7 @@
             <div class="d">Anyone with this link can see your timetable. Don't share it publicly, but you can paste it into your personal calendar apps.</div></div></li>
         </ol>
 
-        <img src="https://github.com/akshatvx2027/iimcal/blob/main/images/01-acadhub-calendar-link.jpg" alt="AcadHub Calendar tab showing course link and copy button" class="step-image">
+        <img src="./images/01-acadhub-calendar-link.jpg" alt="AcadHub Calendar tab showing course link and copy button" class="step-image">
 
         <div class="note info"><span class="ic">ℹ️</span>
           <div><b>Personal to you.</b> This link is unique — it has only YOUR courses, not the whole batch.
@@ -185,7 +185,7 @@
             <div class="d">It appears on your phone's Google Calendar app automatically. Changes sync within an hour.</div></div></li>
         </ol>
 
-        <img src="https://github.com/akshatvx2027/iimcal/blob/main/images/03-google-calendar-view.jpg" alt="Google Calendar showing all imported AcadHub courses" class="step-image">
+        <img src="./images/03-google-calendar-view.jpg" alt="Google Calendar showing all imported AcadHub courses" class="step-image">
 
         <div class="note info"><span class="ic">✓</span>
           <div><b>Auto-synced.</b> Whenever a class is rescheduled or moved to a different room, your Google Calendar
@@ -206,54 +206,53 @@
 
     <div class="setup">
       <div class="tabs" role="tablist">
-        <button role="tab" aria-selected="true"  data-tab="secret">Generate your secret</button>
-        <button role="tab" aria-selected="false" data-tab="integrate">Link it to Google</button>
+        <button role="tab" aria-selected="true"  data-tab="gcal">Copy from Google Calendar</button>
+        <button role="tab" aria-selected="false" data-tab="acadhub">Paste into AcadHub</button>
       </div>
 
-      <div class="panel" data-panel="secret" data-active="true">
+      <div class="panel" data-panel="gcal" data-active="true">
         <ol class="steps">
-          <li><div><div class="t">Open AcadHub on your phone</div>
-            <div class="d">Go to the Calendar tab (🗓️ at the bottom).</div></div></li>
-          <li><div><div class="t">Scroll down to <kbd>Link your Google Calendar</kbd></div>
-            <div class="d">You'll see a button that says "Generate secret" or similar.</div></div></li>
-          <li><div><div class="t">Tap the button to generate your secret code</div>
-            <div class="d">A unique code appears. It looks like: <code style="background:#F1F5F9;padding:2px 6px;border-radius:4px;font-size:13px">gcal-secret-abc123xyz789...</code></div></div></li>
-          <li><div><div class="t">Copy this code</div>
-            <div class="d">Long-press and select "Copy". You'll paste it into Google Calendar next.</div></div></li>
-          <li><div><div class="t">Save this secret somewhere safe</div>
-            <div class="d">You only need it once. If you lose it, you can generate a new one anytime from this same screen.</div></div></li>
+          <li><div><div class="t">Open Google Calendar Settings</div>
+            <div class="d">Go to <kbd>calendar.google.com</kbd> and click the gear icon (⚙️) in the top right, then choose <kbd>Settings</kbd>.</div></div></li>
+          <li><div><div class="t">Find the calendar with your classes in the left sidebar</div>
+            <div class="d">Hover over it and click the three dots <kbd>:</kbd> → <kbd>Settings and sharing</kbd>.</div></div></li>
+          <li><div><div class="t">Scroll down to <kbd>Integrate calendar</kbd></div>
+            <div class="d">You'll see a section with integration options.</div></div></li>
+          <li><div><div class="t">Find the <kbd>Secret address in iCal format</kbd> box</div>
+            <div class="d">It looks like a long URL and ends in <code style="background:#F1F5F9;padding:2px 6px;border-radius:4px;font-size:13px">/basic.ics</code></div></div></li>
+          <li><div><div class="t">Copy this secret address</div>
+            <div class="d">Click the copy button or select and copy the entire URL. This is your Google Calendar's secret code.</div></div></li>
         </ol>
 
-        <img src="images/04-integrate-calendar.jpg" alt="AcadHub Calendar tab showing secret code generation" class="step-image">
+        <img src="./images/02-google-settings.jpg" alt="Google Calendar Settings page" class="step-image">
+        <img src="./images/05-google-calendar-options.jpg" alt="Google Calendar options menu showing Settings and sharing" class="step-image">
 
         <div class="note info"><span class="ic">🔒</span>
-          <div><b>One-way access.</b> This secret only lets AcadHub <em>read</em> your calendar. It cannot add events,
-          delete things, or edit anything. Your Google Calendar stays completely under your control.</div>
+          <div><b>This secret is personal.</b> Anyone with this URL can see your calendar. Treat it like a password and only paste it into AcadHub.</div>
         </div>
       </div>
 
-      <div class="panel" data-panel="integrate">
+      <div class="panel" data-panel="acadhub">
         <ol class="steps">
-          <li><div><div class="t">Go to Google Calendar Settings</div>
-            <div class="d">On <kbd>calendar.google.com</kbd>, click the gear icon (⚙️) and choose <kbd>Settings</kbd>.</div></div></li>
-          <li><div><div class="t">On the left, click <kbd>Integrate calendar</kbd></div>
-            <div class="d">It's in the "Settings for my calendars" section.</div></div></li>
-          <li><div><div class="t">Find the <kbd>Secret address in iCal format</kbd> box</div>
-            <div class="d">This is where you'll paste the code from AcadHub.</div></div></li>
-          <li><div><div class="t">Paste your AcadHub secret code</div>
-            <div class="d">The code you copied from AcadHub goes into this field.</div></div></li>
-          <li><div><div class="t">Save the changes</div>
-            <div class="d">Google Calendar now has permission to read your calendar.</div></div></li>
-          <li><div><div class="t">Done — AcadHub can now see your busy times</div>
-            <div class="d">The next time you check AcadHub's Calendar tab, it will show conflicts and warn you about double-bookings.</div></div></li>
+          <li><div><div class="t">Open AcadHub on your phone</div>
+            <div class="d">Go to the Calendar tab (🗓️ at the bottom).</div></div></li>
+          <li><div><div class="t">Look for the <kbd>Connect my Google Calendar</kbd> button</div>
+            <div class="d">It says "Pull in the class timetable the institute publishes".</div></div></li>
+          <li><div><div class="t">Tap the button</div>
+            <div class="d">A modal appears titled "My Google Calendar" with a text field that says "PASTE IT HERE".</div></div></li>
+          <li><div><div class="t">Paste the secret address you copied from Google Calendar</div>
+            <div class="d">Long-press in the text field and select "Paste". The URL should end in <code style="background:#F1F5F9;padding:2px 6px;border-radius:4px;font-size:13px">/basic.ics</code></div></div></li>
+          <li><div><div class="t">Tap <kbd>Connect calendar</kbd></div>
+            <div class="d">AcadHub links to your Google Calendar.</div></div></li>
+          <li><div><div class="t">Done — AcadHub can now see your schedule</div>
+            <div class="d">Your real timetable (including electives and personal events) now syncs to AcadHub.</div></div></li>
         </ol>
 
-        <img src="https://github.com/akshatvx2027/iimcal/blob/main/images/04-integrate-calendar.jpg" alt="Google Calendar Settings showing Integrate calendar option" class="step-image">
-        <img src="https://github.com/akshatvx2027/iimcal/blob/main/images/02-google-settings.jpg" alt="Google Calendar Calendar settings page with integrate option highlighted" class="step-image">
+        <img src="./images/01-acadhub-calendar-link.jpg" alt="AcadHub Calendar tab with Connect my Google Calendar button" class="step-image">
+        <img src="./images/04-integrate-calendar.jpg" alt="AcadHub modal showing Google Calendar connection form" class="step-image">
 
         <div class="note info"><span class="ic">✓</span>
-          <div><b>What this does:</b> AcadHub now knows when you have interviews, project work, or personal plans booked.
-          It can alert you if a class conflicts with something you've already committed to.</div>
+          <div><b>What this does:</b> AcadHub now has access to your Google Calendar. It shows your real schedule — including your electives, and only yours — so you can see everything in one place and catch schedule conflicts.</div>
         </div>
       </div>
     </div>
